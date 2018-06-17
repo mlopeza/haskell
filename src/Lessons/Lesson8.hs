@@ -47,19 +47,16 @@ myMultiply left right = retResult
        result = go (abs left) (abs right) 0
 
 data DividedResult = Result Integer | DividedByZero deriving (Show, Eq)
-dividedBy :: Integral a => a -> a -> DividedResult
+dividedBy :: Integer -> Integer -> DividedResult
 dividedBy _ 0 = DividedByZero
 dividedBy numerator denominator = Result retResult
   where go n d sum
           | n < d = sum
           | otherwise = go (n - d) d (sum + 1)
-        retResult 
-          |  (numerator < 0) && (denominator < 0) = result
-          |  (numerator < 0) || (denominator < 0) = (-result)
-          | otherwise        = result
-        result = go (abs numerator) (abs denominator) 0
+        retResult = timesResult numerator denominator result 
+        result = go (toInteger $ abs numerator) (toInteger $ abs denominator) 0
 
-timesResult :: (Num a, Ord a) => a -> a -> a -> a
+timesResult :: Integer -> Integer -> Integer -> Integer
 timesResult left right result
   |  (left < 0) && (right < 0) = result
   |  (left < 0) || (right < 0) = (-result)
