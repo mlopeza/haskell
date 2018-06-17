@@ -7,6 +7,7 @@ eftBool False _ = [False, True]
 eftBool True False = []
 eftBool _ _ = [False, True]
 
+-- e.g. eftOrd LT GT
 eftOrd :: Ordering -> Ordering -> [Ordering]
 eftOrd a b = takeWhile (\x -> x <= b) $ enumFrom a
 
