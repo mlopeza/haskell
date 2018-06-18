@@ -1,5 +1,6 @@
 module Lessons.Lesson9 where
 import Data.Char
+import Data.Bool
 
 eftBool :: Bool -> Bool -> [Bool]
 eftBool False False = [False]
@@ -106,4 +107,22 @@ myLimitedTuplesLength = length myLimitedTuples
   7.- weak head
 -}
 
+{-
+  More Bottoms
+  1.- bottom
+  2.- value
+  3.- bottom
+  4.-
+    Return a list of booleans indicating if the character in the index is a vowel
+    itIsMystery :: String -> [Bool]
+  5.- 
+    a) All numbers from 1 to 10 squared
+    b) [1, 10, 20]
+    c) [15, 15 , 15]
+-}
 
+{-
+  foldBool
+-}
+foldBool :: [Integer]
+foldBool = map (\x -> bool x (-x) $ x == 3) [1..10]
