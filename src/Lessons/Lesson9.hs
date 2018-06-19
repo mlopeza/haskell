@@ -126,3 +126,96 @@ myLimitedTuplesLength = length myLimitedTuples
 -}
 foldBool :: [Integer]
 foldBool = map (\x -> bool x (-x) $ x == 3) [1..10]
+
+multiple3 = filter (\x -> mod x 3 == 0) [1..30]
+multiple3' = [x | x <- [1..30], mod x 3 == 0]
+
+howManyMultiples = length multiple3
+
+myFilter :: String -> [String]
+myFilter w = [ x | x <- words w , x `notElem` ["the", "a", "and"]]
+
+zip' :: [a] -> [b] -> [(a, b)]
+zip' [] _ = []
+zip' _ [] = []
+zip' (a:ar) (b:br) = (a, b) : zip' ar br
+
+zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]
+zipWith' _ [] _ = []
+zipWith' _ _ [] = []
+zipWith' fun (a:ar) (b:br) = (fun a b) : zipWith' fun ar br
+
+zip2' = zipWith (,)
+
+
+getAllUppers :: String -> String
+getAllUppers str = filter isUpper str
+
+capitalizeFirst :: String -> String
+capitalizeFirst "" = ""
+capitalizeFirst (f:rest) = toUpper f : rest
+
+
+capitalizeFirst' "" = ""
+capitalizeFirst' (f:rest) = toUpper f : capitalizeFirst' rest
+
+getFirstCapitalized :: String -> Char
+getFirstCapitalized = head . capitalizeFirst
+
+
+{- End of chapter excercises -}
+myOr :: [Bool] -> Bool
+myOr [] = False
+myOr (x: xs)
+  | x == True = True
+  | otherwise = myOr xs
+
+myAny :: (a -> Bool) -> [a] -> Bool
+myAny _ [] = False
+myAny fun (x : xs) 
+  | fun x == True = True
+  | otherwise = myAny fun xs
+
+myElem :: Eq a => a -> [a] -> Bool
+myElem x all = myAny (==x) all
+
+myReverse :: [a] -> [a]
+myReverse [] = []
+myReverse (x: xs) = myReverse xs ++ [x]
+
+squish :: [[a]] -> [a]
+squish [] = []
+squish (x:xs) = x ++ squish xs
+
+squishMap :: (a -> [b]) -> [a] -> [b]
+squishMap _ [] = []
+squishMap fun (x: xs) = fun x ++ squishMap fun xs
+
+squishAgain :: [[a]] -> [a]
+squishAgain elements = squishMap id elements
+
+myMaximumBy :: (a -> a -> Ordering) -> [a] -> a
+myMaximumBy _ [] = error "empty list"
+myMaximumBy f e = myMaximumBy' f (tail e) (head e)
+
+myMaximumBy' _ [] maximum = maximum
+myMaximumBy' fun (x: xs) maximum
+  | order == GT = myMaximumBy' fun xs x
+  | otherwise = myMaximumBy' fun xs maximum
+    where order = fun x maximum
+
+myMinimumBy :: (a -> a -> Ordering) -> [a] -> a
+myMinimumBy _ [] = error "empty list"
+myMinimumBy f e = myMinimumBy' f (tail e) (head e)
+
+myMinimumBy' _ [] minimum = minimum
+myMinimumBy' fun (x: xs) minimum
+  | order == LT = myMinimumBy' fun xs x
+  | otherwise = myMinimumBy' fun xs minimum
+    where order = fun x minimum
+
+myMaximum :: (Ord a) => [a] -> a
+myMaximum = myMaximumBy compare
+
+myMinimum :: (Ord a) => [a] -> a
+myMinimum = myMinimumBy compare
