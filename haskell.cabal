@@ -29,12 +29,14 @@ library
       Lessons.Lesson8
     , Lessons.Lesson9
     , Lessons.Cipher
+    , Lessons.Lesson10
   other-modules:
       Paths_haskell
   hs-source-dirs:
       src
   build-depends:
       base >=4.7 && <5
+    , time
   default-language: Haskell2010
 
 executable haskell-exe
@@ -64,4 +66,5 @@ test-suite haskell-test
     , haskell
     , hspec-discover
     , hspec
+    , time
   default-language: Haskell2010
