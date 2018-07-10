@@ -30,6 +30,7 @@ library
     , Lessons.Lesson9
     , Lessons.Cipher
     , Lessons.Lesson10
+    , Lessons.Lesson11
   other-modules:
       Paths_haskell
   hs-source-dirs:

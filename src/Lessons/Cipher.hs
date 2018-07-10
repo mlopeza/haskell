@@ -24,3 +24,4 @@ caesarCipher num text = shift cipher (num `mod` 26) $ cleanData text
 unCaesar num text = shift uncipher (num `mod` 26) $ cleanData text 
 
 cleanData text = filter (\x -> x == ' ' || x `elem` alphabet) $ map toUpper text
+
